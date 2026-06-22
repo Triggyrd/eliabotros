@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elia Jean Botros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Barlow+Semi+Condensed:wght@300;400;500&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --black:#08080a;--ink:#0e0e10;--panel:#121215;
+    --crimson:#9a2026;--crimson-bright:#c0303a;
+    --bone:#d7d1c6;--bone-bright:#ece7dd;--ash:#8a857d;--faint:#4b483f;
+    --line:rgba(215,209,198,.11);
+    --serif:'Cormorant Garamond',serif;--sans:'Barlow Semi Condensed',sans-serif;--type:'Special Elite',monospace;
+  }
+  html{scroll-behavior:smooth;}
+  body{background:var(--black);color:var(--bone);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden;position:relative;}
+  body::before{content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:140px 140px;}
+  body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;background:radial-gradient(ellipse at center,transparent 45%,rgba(0,0,0,.55) 100%);}
+
+  /* reticle cursor */
+  .reticle{position:fixed;top:0;left:0;width:34px;height:34px;z-index:10001;pointer-events:none;opacity:0;transform:translate(-50%,-50%);transition:opacity .3s ease;will-change:transform;}
+  .reticle svg{width:100%;height:100%;display:block;transition:transform .18s ease;}
+  .reticle .ring{transition:stroke .2s ease;}
+  .reticle.hot svg{transform:rotate(45deg) scale(1.35);}
+  .reticle.hot .ring{stroke:var(--crimson-bright);}
+  .reticle.down svg{transform:scale(.82);}
+  @media(pointer:fine){*{cursor:none !important;}}
+
+  /* file tag corner */
+  .filetag{position:fixed;left:48px;bottom:22px;z-index:1000;font-family:var(--type);font-size:.6rem;letter-spacing:.22em;color:var(--faint);text-transform:uppercase;}
+  .filetag .rec{color:var(--crimson-bright);}
+
+  /* nav */
+  nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:space-between;align-items:center;padding:22px 48px;transition:padding .4s,background .4s;background:linear-gradient(to bottom,rgba(8,8,10,.92),transparent);}
+  nav.scrolled{padding:14px 48px;background:rgba(8,8,10,.96);border-bottom:1px solid var(--line);}
+  .nav-mark{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-size:1.32rem;font-weight:500;letter-spacing:.14em;color:var(--bone-bright);}
+  .nav-mark .emblem{width:20px;height:20px;}
+  .nav-mark .dot{color:var(--crimson-bright);}
+  .nav-links{display:flex;gap:28px;list-style:none;}
+  .nav-links a{color:var(--ash);text-decoration:none;font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;transition:color .3s;position:relative;padding-bottom:4px;}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--crimson-bright);transition:width .35s;}
+  .nav-links a:hover{color:var(--bone-bright);}
+  .nav-links a:hover::after{width:100%;}
+
+  /* hero */
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:0 24px;position:relative;}
+  .hero-emblem{width:54px;height:54px;margin-bottom:26px;opacity:0;animation:rise 1.1s .1s forwards;}
+  .hero-eyebrow{font-family:var(--type);font-size:.72rem;letter-spacing:.34em;text-transform:uppercase;color:var(--ash);margin-bottom:26px;opacity:0;animation:rise 1.1s .25s forwards;}
+  .hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(3rem,10vw,7rem);line-height:1.02;color:var(--bone-bright);letter-spacing:.01em;opacity:0;animation:rise 1.1s .5s forwards;}
+  .hero h1 .given{display:block;}
+  .hero h1 .family{display:block;font-weight:500;}
+  .hero-rule{width:1px;height:60px;background:linear-gradient(to bottom,var(--crimson),transparent);margin:32px 0 24px;opacity:0;animation:rise 1.1s .8s forwards;}
+  .hero-sub{font-size:.9rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ash);opacity:0;animation:rise 1.1s 1s forwards;}
+  .hero-status{font-family:var(--type);font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;color:var(--faint);margin-top:18px;opacity:0;animation:rise 1.1s 1.15s forwards;}
+  .hero-status b{color:var(--crimson-bright);font-weight:400;}
+  .scroll-cue{position:absolute;bottom:38px;left:50%;transform:translateX(-50%);font-family:var(--type);font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--faint);opacity:0;animation:rise 1.1s 1.5s forwards;}
+  @keyframes rise{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);}}
+
+  /* sections */
+  section{max-width:1040px;margin:0 auto;padding:130px 48px;}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:56px;}
+  .sec-num{font-family:var(--type);font-size:.72rem;color:var(--crimson-bright);letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;}
+  .sec-title{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,4.5vw,3rem);color:var(--bone-bright);letter-spacing:.02em;}
+  .sec-rule{flex:1;height:1px;background:var(--line);align-self:center;margin-left:8px;}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* profile */
+  .profile-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:64px;align-items:start;}
+  .profile-lead{font-family:var(--serif);font-size:1.5rem;font-weight:300;line-height:1.5;color:var(--bone-bright);}
+  .profile-body{margin-top:20px;font-size:1.02rem;color:var(--bone);max-width:46ch;}
+  .detail{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);}
+  .detail:last-child{border-bottom:none;}
+  .detail .k{font-family:var(--type);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ash);}
+  .detail .v{font-size:.98rem;color:var(--bone-bright);text-align:right;}
+
+  /* experience */
+  .xp{position:relative;padding-left:32px;}
+  .xp::before{content:"";position:absolute;left:0;top:6px;bottom:6px;width:1px;background:var(--line);}
+  .xp-item{position:relative;padding:0 0 46px 0;}
+  .xp-item:last-child{padding-bottom:0;}
+  .xp-item::before{content:"";position:absolute;left:-36px;top:9px;width:7px;height:7px;border:1px solid var(--crimson);background:var(--black);border-radius:50%;transition:background .3s;}
+  .xp-item:hover::before{background:var(--crimson-bright);}
+  .xp-date{font-family:var(--type);font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ash);}
+  .xp-title{font-family:var(--serif);font-size:1.4rem;color:var(--bone-bright);margin:5px 0 2px;font-weight:400;}
+  .xp-role{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--crimson-bright);margin-bottom:10px;}
+  .xp-desc{font-size:1rem;color:var(--bone);max-width:58ch;}
+  .xp-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .xp-tag{font-family:var(--type);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);border:1px solid var(--line);padding:4px 11px;}
+
+  /* portfolio coming soon */
+  .soon{border:1px solid var(--line);padding:84px 32px;text-align:center;position:relative;}
+  .soon::before,.soon::after{content:"";position:absolute;width:14px;height:14px;border-color:var(--crimson);border-style:solid;border-width:0;opacity:.6;}
+  .soon::before{top:10px;left:10px;border-top-width:1px;border-left-width:1px;}
+  .soon::after{bottom:10px;right:10px;border-bottom-width:1px;border-right-width:1px;}
+  .soon-mark{font-family:var(--type);font-size:.66rem;letter-spacing:.3em;text-transform:uppercase;color:var(--crimson-bright);margin-bottom:18px;}
+  .soon-title{font-family:var(--serif);font-weight:300;font-size:clamp(2.4rem,6vw,4rem);color:var(--bone-bright);letter-spacing:.04em;}
+  .soon-rule{width:54px;height:1px;background:var(--crimson);margin:24px auto 18px;}
+  .soon-note{font-size:.92rem;color:var(--ash);letter-spacing:.04em;max-width:42ch;margin:0 auto;}
+
+  /* capabilities */
+  .cap-group{margin-bottom:38px;}
+  .cap-group:last-child{margin-bottom:0;}
+  .cap-label{font-family:var(--type);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--crimson-bright);margin-bottom:16px;}
+  .cap-list{display:flex;flex-wrap:wrap;gap:10px;}
+  .cap-item{font-size:.82rem;letter-spacing:.06em;color:var(--bone);border:1px solid var(--line);padding:8px 16px;transition:border-color .3s,color .3s;}
+  .cap-item:hover{border-color:var(--crimson);color:var(--bone-bright);}
+
+  /* contact */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+  .contact-lead{font-family:var(--serif);font-size:1.7rem;font-weight:300;line-height:1.45;color:var(--bone-bright);}
+  .contact-list{display:flex;flex-direction:column;gap:4px;}
+  .contact-row{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--bone);transition:color .3s;}
+  .contact-row:hover{color:var(--bone-bright);}
+  .contact-row .k{font-family:var(--type);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ash);}
+  .contact-row .v{font-size:1rem;}
+
+  footer{text-align:center;padding:70px 48px 56px;border-top:1px solid var(--line);}
+  .foot-emblem{width:30px;height:30px;margin:0 auto 16px;opacity:.55;cursor:pointer;transition:opacity .4s;}
+  .foot-emblem:hover{opacity:1;}
+  .foot-mark{font-family:var(--serif);font-size:1.3rem;letter-spacing:.14em;color:var(--bone);}
+  .foot-meta{font-family:var(--type);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--faint);margin-top:14px;}
+
+  a:focus-visible,.foot-emblem:focus-visible{outline:1px solid var(--crimson-bright);outline-offset:4px;}
+
+  @media(max-width:760px){
+    nav{padding:16px 22px;}.nav-mark{font-size:1.1rem;}
+    .nav-links{gap:14px;}.nav-links a{font-size:.58rem;letter-spacing:.14em;}
+    section{padding:84px 24px;}
+    .profile-grid,.contact-grid{grid-template-columns:1fr;gap:36px;}
+    .filetag{left:22px;}
+  }
+  @media(max-width:480px){.nav-links{display:none;}}
+  @media(prefers-reduced-motion:reduce){.reveal{transition:opacity .4s ease;transform:none;}.reticle svg{transition:none;}}
+</style>
+</head>
+<body>
+
+<div class="reticle" id="reticle" aria-hidden="true">
+  <svg viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
+    <circle class="ring" cx="17" cy="17" r="13" fill="none" stroke="#9a2026" stroke-width="1.4"/>
+    <line x1="17" y1="1" x2="17" y2="8" stroke="#c0303a" stroke-width="1.4"/>
+    <line x1="17" y1="26" x2="17" y2="33" stroke="#c0303a" stroke-width="1.4"/>
+    <line x1="1" y1="17" x2="8" y2="17" stroke="#c0303a" stroke-width="1.4"/>
+    <line x1="26" y1="17" x2="33" y2="17" stroke="#c0303a" stroke-width="1.4"/>
+    <circle cx="17" cy="17" r="1.4" fill="#c0303a"/>
+  </svg>
+</div>
+
+<div class="filetag">File No. <span class="rec">IE-2638</span> · Status: Active</div>
+
+<nav id="nav">
+  <div class="nav-mark">
+    <svg class="emblem" viewBox="0 0 40 40"><polygon points="20,3 35,11.5 35,28.5 20,37 5,28.5 5,11.5" fill="none" stroke="#c0303a" stroke-width="1.6"/><g transform="translate(20,20)"><circle r="2.6" fill="none" stroke="#c0303a" stroke-width="1.6"/><g stroke="#c0303a" stroke-width="1.6" fill="none"><path d="M0,-3 a5.5,5.5 0 0,1 4.8,8" transform="rotate(0)"/><path d="M0,-3 a5.5,5.5 0 0,1 4.8,8" transform="rotate(120)"/><path d="M0,-3 a5.5,5.5 0 0,1 4.8,8" transform="rotate(240)"/></g></g></svg>
+    Elia Botros<span class="dot">.</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#profile">Profile</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#capabilities">Capabilities</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <svg class="hero-emblem" viewBox="0 0 40 40"><polygon points="20,3 35,11.5 35,28.5 20,37 5,28.5 5,11.5" fill="none" stroke="#9a2026" stroke-width="1.3"/><polygon points="20,8 30.5,14 30.5,26 20,32 9.5,26 9.5,14" fill="none" stroke="#4b483f" stroke-width="1" stroke-dasharray="2 3"/><g transform="translate(20,20)"><circle r="3" fill="none" stroke="#c0303a" stroke-width="1.6"/><g stroke="#c0303a" stroke-width="1.6" fill="none"><path d="M0,-3.4 a6,6 0 0,1 5.2,9" transform="rotate(0)"/><path d="M0,-3.4 a6,6 0 0,1 5.2,9" transform="rotate(120)"/><path d="M0,-3.4 a6,6 0 0,1 5.2,9" transform="rotate(240)"/></g></g></svg>
+  <div class="hero-eyebrow">Field File · Industrial Engineering · Penn State</div>
+  <h1><span class="given">Elia Jean</span><span class="family">Botros</span></h1>
+  <div class="hero-rule"></div>
+  <div class="hero-sub">Systems and Process Optimization</div>
+  <div class="hero-status">Subject <b>Active</b> · Extraction Dec 2026</div>
+  <div class="scroll-cue">Scroll</div>
+</header>
+
+<section id="profile">
+  <div class="sec-head reveal"><span class="sec-num">File 01</span><h2 class="sec-title">Profile</h2><span class="sec-rule"></span></div>
+  <div class="profile-grid">
+    <div class="reveal">
+      <p class="profile-lead">I turn complex operational problems into clear, defensible decisions.</p>
+      <p class="profile-body">An Industrial Engineering student focused on process optimization, systems thinking, and data driven problem solving, with a foundation across manufacturing systems, quality engineering, and applied machine learning.</p>
+    </div>
+    <div class="reveal">
+      <div class="detail"><span class="k">Degree</span><span class="v">B.S. Industrial Engineering</span></div>
+      <div class="detail"><span class="k">Minor</span><span class="v">Engineering Leadership Development</span></div>
+      <div class="detail"><span class="k">GPA</span><span class="v">3.3</span></div>
+      <div class="detail"><span class="k">Graduation</span><span class="v">December 2026</span></div>
+      <div class="detail"><span class="k">Location</span><span class="v">New Hyde Park, New York</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="sec-head reveal"><span class="sec-num">File 02</span><h2 class="sec-title">Experience</h2><span class="sec-rule"></span></div>
+  <div class="xp">
+    <div class="xp-item reveal">
+      <div class="xp-date">Jan 2025 to May 2025</div>
+      <h3 class="xp-title">ACRP University Design Competition</h3>
+      <div class="xp-role">Team Lead and System Designer</div>
+      <p class="xp-desc">Designed an AI driven route optimization system to cut airport ground equipment emissions, built in MATLAB and SUMO with a four member team.</p>
+      <div class="xp-tags"><span class="xp-tag">MATLAB</span><span class="xp-tag">SUMO</span><span class="xp-tag">Optimization</span></div>
+    </div>
+    <div class="xp-item reveal">
+      <div class="xp-date">Sept 2025 to Dec 2025</div>
+      <h3 class="xp-title">Engineering Project Management</h3>
+      <div class="xp-role">Project Lead</div>
+      <p class="xp-desc">Built schedules, work breakdown structures, and risk and change control in Microsoft Project, through to formal closeout.</p>
+      <div class="xp-tags"><span class="xp-tag">MS Project</span><span class="xp-tag">Scheduling</span><span class="xp-tag">Risk Analysis</span></div>
+    </div>
+    <div class="xp-item reveal">
+      <div class="xp-date">Summers 2021 to 2025</div>
+      <h3 class="xp-title">Kew Gardens Animal Hospital</h3>
+      <div class="xp-role">Operations Assistant</div>
+      <p class="xp-desc">Streamlined exam prep and patient intake to cut setup time between procedures and balance daily caseload.</p>
+      <div class="xp-tags"><span class="xp-tag">Operations</span><span class="xp-tag">Scheduling</span></div>
+    </div>
+    <div class="xp-item reveal">
+      <div class="xp-date">Jan 2024 to May 2024</div>
+      <h3 class="xp-title">FIRST Robotics, Team 2638</h3>
+      <div class="xp-role">Mentor and Tutor</div>
+      <p class="xp-desc">Coached students through mechanical, electrical, and systems level concepts and design tradeoffs.</p>
+      <div class="xp-tags"><span class="xp-tag">Robotics</span><span class="xp-tag">Mentorship</span></div>
+    </div>
+    <div class="xp-item reveal">
+      <div class="xp-date">Jan 2023 to Oct 2023</div>
+      <h3 class="xp-title">Penn State Intramural Sports</h3>
+      <div class="xp-role">Broadcast Lead</div>
+      <p class="xp-desc">Ran live broadcast setup, production flow, and real time problem solving during events.</p>
+      <div class="xp-tags"><span class="xp-tag">Live Production</span><span class="xp-tag">Leadership</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="sec-head reveal"><span class="sec-num">File 03</span><h2 class="sec-title">Portfolio</h2><span class="sec-rule"></span></div>
+  <div class="soon reveal">
+    <div class="soon-mark">In Development</div>
+    <div class="soon-title">Coming Soon</div>
+    <div class="soon-rule"></div>
+    <p class="soon-note">Selected project work and case studies are being prepared. Check back shortly.</p>
+  </div>
+</section>
+
+<section id="capabilities">
+  <div class="sec-head reveal"><span class="sec-num">File 04</span><h2 class="sec-title">Capabilities</h2><span class="sec-rule"></span></div>
+  <div class="reveal">
+    <div class="cap-group">
+      <div class="cap-label">Methods</div>
+      <div class="cap-list">
+        <span class="cap-item">Process Optimization</span><span class="cap-item">Simulation Modeling</span><span class="cap-item">Six Sigma / SPC</span><span class="cap-item">Operations Research</span><span class="cap-item">Design of Experiments</span>
+      </div>
+    </div>
+    <div class="cap-group">
+      <div class="cap-label">Software</div>
+      <div class="cap-list">
+        <span class="cap-item">MATLAB</span><span class="cap-item">Python</span><span class="cap-item">SQL</span><span class="cap-item">Excel</span><span class="cap-item">Minitab</span><span class="cap-item">LINDO</span><span class="cap-item">SolidWorks</span><span class="cap-item">AutoCAD</span><span class="cap-item">MS Project</span><span class="cap-item">Figma</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="sec-head reveal"><span class="sec-num">File 05</span><h2 class="sec-title">Contact</h2><span class="sec-rule"></span></div>
+  <div class="contact-grid">
+    <p class="contact-lead reveal">Open to full time and co-op opportunities for 2026.</p>
+    <div class="contact-list reveal">
+      <a class="contact-row" href="mailto:botros.elia7@gmail.com"><span class="k">Email</span><span class="v">botros.elia7@gmail.com</span></a>
+      <div class="contact-row"><span class="k">Location</span><span class="v">New Hyde Park, New York</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <svg class="foot-emblem" id="secret" tabindex="0" role="link" aria-label="Connections" viewBox="0 0 40 40"><polygon points="20,3 35,11.5 35,28.5 20,37 5,28.5 5,11.5" fill="none" stroke="#9a2026" stroke-width="1.4"/><g transform="translate(20,20)"><circle r="2.6" fill="none" stroke="#c0303a" stroke-width="1.6"/><g stroke="#c0303a" stroke-width="1.6" fill="none"><path d="M0,-3 a5.5,5.5 0 0,1 4.8,8" transform="rotate(0)"/><path d="M0,-3 a5.5,5.5 0 0,1 4.8,8" transform="rotate(120)"/><path d="M0,-3 a5.5,5.5 0 0,1 4.8,8" transform="rotate(240)"/></g></g></svg>
+  <div class="foot-mark">Elia Jean Botros</div>
+  <div class="foot-meta">Field File · 2026</div>
+</footer>
+
+<script>
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>60);});
+
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ e.target.classList.toggle('in',e.isIntersecting); });
+  },{threshold:.18});
+  document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+
+  // secret emblem -> connections page
+  function openSecret(){ window.location.href='connections.html'; }
+  var secret=document.getElementById('secret');
+  secret.addEventListener('click',openSecret);
+  secret.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){e.preventDefault();openSecret();} });
+
+  (function(){
+    if(!window.matchMedia||!window.matchMedia('(pointer:fine)').matches) return;
+    var reticle=document.getElementById('reticle');
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var tx=0,ty=0,cx=0,cy=0,shown=false;
+    window.addEventListener('mousemove',function(ev){tx=ev.clientX;ty=ev.clientY;if(!shown){shown=true;reticle.style.opacity=1;cx=tx;cy=ty;}});
+    window.addEventListener('mouseout',function(ev){if(!ev.relatedTarget){reticle.style.opacity=0;shown=false;}});
+    window.addEventListener('mousedown',function(){reticle.classList.add('down');});
+    window.addEventListener('mouseup',function(){reticle.classList.remove('down');});
+    function loop(){var e=reduce?1:0.22;cx+=(tx-cx)*e;cy+=(ty-cy)*e;reticle.style.transform='translate('+cx+'px,'+cy+'px) translate(-50%,-50%)';requestAnimationFrame(loop);}
+    requestAnimationFrame(loop);
+    document.querySelectorAll('a, button, .cap-item, .xp-item, .contact-row, .nav-mark, .foot-emblem').forEach(function(el){
+      el.addEventListener('mouseenter',function(){reticle.classList.add('hot');});
+      el.addEventListener('mouseleave',function(){reticle.classList.remove('hot');});
+    });
+  })();
+</script>
+</body>
+</html>
