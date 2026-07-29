@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="https://eliabotros.com/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Elia Botros">
+<meta property="og:description" content="Industrial Engineering at Penn State · Systems and Process Optimization.">
+<meta property="og:url" content="https://eliabotros.com">
+<meta property="og:image" content="https://eliabotros.com/preview.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#041E42">
+<title>Elia Botros</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --navy:#041E42;        /* Nittany Navy */
+    --navy-2:#0A2A57;
+    --blue:#1E407C;        /* Penn State Blue */
+    --sky:#6B9BD8;
+    --sky-soft:#9Fc1E8;
+    --paper:#F5F7FA;
+    --paper-2:#ECEFF4;
+    --white:#ffffff;
+    --ink:#0C1B33;
+    --slate:#54627B;
+    --line:rgba(4,30,66,.12);
+    --line-2:rgba(255,255,255,.14);
+    --serif:'Fraunces',Georgia,serif;
+    --sans:'Inter',system-ui,sans-serif;
+    --shadow:0 18px 44px -22px rgba(4,30,66,.4);
+    --shadow-lg:0 30px 70px -30px rgba(4,30,66,.55);
+  }
+  html{scroll-behavior:smooth;}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:400;line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px;}
+
+  /* ---------- nav ---------- */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .4s,box-shadow .4s,padding .4s;padding:20px 0;}
+  nav.scrolled{background:rgba(4,30,66,.96);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(255,255,255,.06);padding:12px 0;}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;}
+  .brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none;}
+  .brand .mono{width:38px;height:38px;flex:0 0 38px;border-radius:9px;background:linear-gradient(150deg,var(--blue),var(--navy));border:1px solid rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:600;font-size:1rem;color:#fff;letter-spacing:.02em;}
+  .brand b{font-family:var(--serif);font-weight:600;font-size:1.15rem;letter-spacing:.01em;}
+  .nav-links{display:flex;align-items:center;gap:30px;list-style:none;}
+  .nav-links a{color:rgba(255,255,255,.8);text-decoration:none;font-size:.82rem;font-weight:500;letter-spacing:.02em;transition:color .25s;}
+  .nav-links a:hover{color:#fff;}
+  .nav-cta{padding:9px 18px;border:1px solid rgba(255,255,255,.35);border-radius:999px;font-size:.8rem !important;transition:background .25s,color .25s !important;}
+  .nav-cta:hover{background:#fff;color:var(--navy) !important;}
+  .nav-toggle{display:none;background:none;border:none;color:#fff;font-size:1.5rem;line-height:1;}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;background:radial-gradient(120% 120% at 80% 0%,#0B2E60 0%,var(--navy) 55%);color:#fff;padding:150px 0 90px;overflow:hidden;}
+  .hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.06) 1.1px,transparent 1.1px);background-size:26px 26px;opacity:.6;mask-image:linear-gradient(to bottom,#000,transparent 85%);-webkit-mask-image:linear-gradient(to bottom,#000,transparent 85%);}
+  .hero::after{content:"";position:absolute;top:-30%;right:-10%;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(107,155,216,.28),transparent 62%);filter:blur(20px);}
+  /* ===== HERO GLOW · delete this rule (and the div + script marked the same) to remove ===== */
+  .hero-glow{position:absolute;left:0;top:0;width:440px;height:440px;border-radius:50%;pointer-events:none;z-index:1;opacity:0;transform:translate(-50%,-50%);transition:opacity .45s ease;background:radial-gradient(circle,rgba(120,165,222,.30),rgba(120,165,222,0) 60%);mix-blend-mode:screen;}
+  .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center;}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.76rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--sky-soft);margin-bottom:22px;}
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--sky);}
+  .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(3rem,7vw,5.4rem);line-height:1.02;letter-spacing:-.01em;margin-bottom:20px;}
+  .hero h1 em{font-style:italic;color:var(--sky-soft);}
+  .hero-lead{font-size:1.18rem;color:rgba(255,255,255,.82);max-width:44ch;margin-bottom:18px;font-weight:300;}
+  .hero-sub{font-size:.86rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:34px;}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:999px;font-size:.9rem;font-weight:600;text-decoration:none;transition:transform .2s,background .25s,box-shadow .25s,color .25s;letter-spacing:.01em;}
+  .btn-primary{background:#fff;color:var(--navy);box-shadow:0 12px 30px -12px rgba(0,0,0,.5);}
+  .btn-primary:hover{transform:translateY(-2px);background:var(--sky-soft);}
+  .btn-ghost{border:1px solid rgba(255,255,255,.4);color:#fff;}
+  .btn-ghost:hover{transform:translateY(-2px);background:rgba(255,255,255,.1);}
+
+  /* portrait */
+  .portrait{position:relative;justify-self:center;}
+  .portrait .frame{position:relative;z-index:2;width:300px;height:360px;border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.25);box-shadow:var(--shadow-lg);background:#0A2A57 url('avatar.JPG') center/cover no-repeat;}
+  .portrait .accent{position:absolute;z-index:1;right:-20px;bottom:-20px;width:100%;height:100%;border-radius:18px;border:2px solid var(--sky);opacity:.5;}
+  .portrait .tag{position:absolute;z-index:3;left:-22px;bottom:26px;background:#fff;color:var(--navy);border-radius:12px;padding:12px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:1px;}
+  .portrait .tag b{font-family:var(--serif);font-size:1.4rem;font-weight:600;line-height:1;}
+  .portrait .tag span{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--slate);}
+
+  .weare{margin-top:44px;position:relative;z-index:2;font-size:.72rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+  .weare b{color:var(--sky-soft);font-weight:600;}
+
+  /* ---------- stats band ---------- */
+  .stats{background:var(--navy-2);color:#fff;}
+  .stats-in{display:grid;grid-template-columns:repeat(4,1fr);}
+  .stat{padding:30px 24px;border-left:1px solid rgba(255,255,255,.1);}
+  .stat:first-child{border-left:none;}
+  .stat .k{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--sky-soft);margin-bottom:8px;}
+  .stat .v{font-family:var(--serif);font-size:1.5rem;font-weight:500;line-height:1.1;}
+
+  /* ---------- sections ---------- */
+  section.block{padding:96px 0;}
+  section.alt{background:var(--white);}
+  .sec-eyebrow{font-size:.76rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;}
+  .sec-title{font-family:var(--serif);font-weight:600;font-size:clamp(2rem,4.5vw,2.9rem);line-height:1.1;letter-spacing:-.01em;color:var(--navy);margin-bottom:8px;}
+  .sec-head{margin-bottom:52px;max-width:60ch;}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* profile */
+  .profile-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:56px;align-items:start;}
+  .profile-lead{font-family:var(--serif);font-size:1.7rem;line-height:1.4;font-weight:500;color:var(--navy);margin-bottom:20px;}
+  .profile-body{font-size:1.06rem;color:var(--slate);}
+  .facts{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:8px 22px;}
+  section.alt .facts{background:var(--paper);}
+  .fact{display:flex;justify-content:space-between;gap:16px;padding:15px 0;border-bottom:1px solid var(--line);}
+  .fact:last-child{border-bottom:none;}
+  .fact .k{font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;color:var(--slate);font-weight:500;}
+  .fact .v{font-weight:600;color:var(--navy);text-align:right;}
+
+  /* experience timeline */
+  .xp{position:relative;padding-left:34px;}
+  .xp::before{content:"";position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--blue),var(--line));}
+  .xp-item{position:relative;padding:0 0 40px;}
+  .xp-item:last-child{padding-bottom:0;}
+  .xp-item::before{content:"";position:absolute;left:-34px;top:6px;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--blue);transition:background .3s,transform .3s;}
+  .xp-item:hover::before{background:var(--blue);transform:scale(1.15);}
+  .xp-date{font-size:.76rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);}
+  .xp-title{font-family:var(--serif);font-size:1.4rem;font-weight:600;color:var(--navy);margin:6px 0 2px;}
+  .xp-role{font-size:.92rem;font-weight:600;color:var(--slate);margin-bottom:10px;}
+  .xp-desc{font-size:1.02rem;color:var(--slate);max-width:64ch;}
+  .xp-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;}
+  .xp-tag{font-size:.72rem;font-weight:600;letter-spacing:.03em;color:var(--blue);background:rgba(30,64,124,.08);padding:5px 13px;border-radius:999px;}
+
+  /* capabilities */
+  .cap-cols{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+  .cap-group h3{font-size:.8rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:18px;}
+  .cap-list{display:flex;flex-wrap:wrap;gap:10px;}
+  .cap-item{font-size:.9rem;font-weight:500;color:var(--navy);background:#fff;border:1px solid var(--line);padding:10px 18px;border-radius:10px;transition:transform .2s,border-color .25s,background .25s,color .25s;}
+  section.alt .cap-item{background:var(--paper);}
+  .cap-item:hover{transform:translateY(-3px);background:var(--navy);color:#fff;border-color:var(--navy);}
+
+  /* links */
+  .links-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
+  .linkcard{display:flex;align-items:center;gap:18px;padding:26px;background:#fff;border:1px solid var(--line);border-radius:16px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s,border-color .25s;position:relative;overflow:hidden;}
+  .linkcard::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--blue);transform:scaleY(0);transform-origin:bottom;transition:transform .3s;}
+  .linkcard:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent;}
+  .linkcard:hover::after{transform:scaleY(1);}
+  .linkcard .ic{width:44px;height:44px;flex:0 0 44px;border-radius:11px;background:rgba(30,64,124,.09);display:flex;align-items:center;justify-content:center;color:var(--blue);transition:background .3s,color .3s;}
+  .linkcard:hover .ic{background:var(--navy);color:#fff;}
+  .linkcard .ic svg{width:22px;height:22px;}
+  .linkcard .t{font-family:var(--serif);font-size:1.3rem;font-weight:600;color:var(--navy);line-height:1.1;}
+  .linkcard .s{font-size:.82rem;color:var(--slate);margin-top:2px;}
+  .linkcard .arr{margin-left:auto;color:var(--blue);font-size:1.1rem;transition:transform .25s;}
+  .linkcard:hover .arr{transform:translate(3px,-3px);}
+
+  /* work / coming soon */
+  .soon{border:2px dashed var(--line);border-radius:18px;padding:70px 32px;text-align:center;background:var(--paper);}
+  .soon .m{font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:14px;}
+  .soon .t{font-family:var(--serif);font-size:clamp(2rem,5vw,3rem);font-weight:600;color:var(--navy);}
+  .soon .n{color:var(--slate);margin-top:12px;max-width:44ch;margin-left:auto;margin-right:auto;}
+
+  /* contact band */
+  .contact{background:radial-gradient(120% 140% at 10% 10%,#0B2E60,var(--navy) 60%);color:#fff;text-align:center;padding:110px 0;position:relative;overflow:hidden;}
+  .contact::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.05) 1.1px,transparent 1.1px);background-size:26px 26px;opacity:.5;}
+  .contact-in{position:relative;z-index:2;}
+  .contact h2{font-family:var(--serif);font-weight:600;font-size:clamp(2.2rem,5vw,3.4rem);margin-bottom:16px;}
+  .contact p{color:rgba(255,255,255,.75);font-size:1.1rem;max-width:46ch;margin:0 auto 34px;font-weight:300;}
+  .contact .loc{margin-top:24px;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+
+  /* footer */
+  footer{background:var(--navy);color:rgba(255,255,255,.6);padding:44px 0;}
+  .foot-in{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+  .foot-brand{display:flex;align-items:center;gap:12px;color:#fff;font-family:var(--serif);font-weight:600;font-size:1.1rem;}
+  .foot-brand .dot{width:8px;height:8px;border-radius:50%;background:var(--sky);}
+  .foot-meta{font-size:.78rem;letter-spacing:.06em;}
+  .foot-secret{opacity:.35;cursor:pointer;transition:opacity .3s;font-size:.78rem;}
+  .foot-secret:hover{opacity:1;color:var(--sky-soft);}
+
+  a:focus-visible,button:focus-visible{outline:2px solid var(--sky);outline-offset:3px;}
+
+  @media(max-width:880px){
+    .hero-grid{grid-template-columns:1fr;gap:44px;}
+    .portrait{justify-self:start;}
+    .profile-grid,.cap-cols{grid-template-columns:1fr;gap:32px;}
+    .stats-in{grid-template-columns:1fr 1fr;}
+    .stat:nth-child(3){border-left:none;}
+    .stat{border-top:1px solid rgba(255,255,255,.1);}
+    .stat:nth-child(1),.stat:nth-child(2){border-top:none;}
+  }
+  @media(max-width:640px){
+    .wrap{padding:0 22px;}
+    .nav-links{position:fixed;inset:0 0 0 auto;width:min(78vw,300px);flex-direction:column;align-items:flex-start;justify-content:center;gap:26px;padding:40px;background:var(--navy);transform:translateX(100%);transition:transform .35s;box-shadow:-20px 0 60px rgba(0,0,0,.4);}
+    .nav-links.open{transform:none;}
+    .nav-toggle{display:block;z-index:101;}
+    nav{background:rgba(4,30,66,.96);}
+    .portrait .frame{width:260px;height:320px;}
+    .stats-in{grid-template-columns:1fr;}
+    .stat{border-left:none;border-top:1px solid rgba(255,255,255,.1);}
+    .stat:first-child{border-top:none;}
+  }
+  @media(prefers-reduced-motion:reduce){.reveal{transition:opacity .3s;transform:none;}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><span class="mono">EB</span><b>Elia Botros</b></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#profile">Profile</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#capabilities">Skills</a></li>
+      <li><a href="#links">Links</a></li>
+      <li><a class="nav-cta" href="#contact">Get in touch</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <!-- HERO GLOW · delete this one line to remove -->
+  <div class="hero-glow" id="heroGlow" aria-hidden="true"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Industrial Engineering · Penn State</div>
+      <h1>Elia <em>Botros</em></h1>
+      <p class="hero-lead">Turning complex operational problems into clear, defensible decisions through systems thinking and data.</p>
+      <div class="hero-sub">Systems &amp; Process Optimization</div>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#contact">Get in touch</a>
+        <a class="btn btn-ghost" href="#experience">See my work</a>
+      </div>
+      <div class="weare"><b>We Are</b> &nbsp;·&nbsp; Penn State · Class of 2026</div>
+    </div>
+    <!-- PORTRAIT · uses avatar.JPG in this folder. Change the filename in the CSS
+         (.portrait .frame background) if your photo has a different name. -->
+    <div class="portrait">
+      <div class="accent"></div>
+      <div class="frame"></div>
+      <div class="tag"><b>3.3</b><span>GPA</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="wrap stats-in">
+    <div class="stat"><div class="k">Major</div><div class="v">Industrial Engineering</div></div>
+    <div class="stat"><div class="k">Campus</div><div class="v">University Park</div></div>
+    <div class="stat"><div class="k">Graduation</div><div class="v">December 2026</div></div>
+    <div class="stat"><div class="k">Based in</div><div class="v">New York · Open anywhere</div></div>
+  </div>
+</div>
+
+<section class="block alt" id="profile">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">01 — Profile</div>
+      <h2 class="sec-title">About me</h2>
+    </div>
+    <div class="profile-grid">
+      <div class="reveal">
+        <p class="profile-lead">I turn complex operational problems into clear, defensible decisions.</p>
+        <p class="profile-body">An Industrial Engineering student at Penn State focused on process optimization, systems thinking, and data driven problem solving. My foundation spans manufacturing systems, quality engineering, operations research, and applied machine learning, and I care most about seeing how processes, people, and data connect to make operations run better.</p>
+      </div>
+      <div class="facts reveal">
+        <div class="fact"><span class="k">Degree</span><span class="v">B.S. Industrial Engineering</span></div>
+        <div class="fact"><span class="k">Minor</span><span class="v">Engineering Leadership Dev.</span></div>
+        <div class="fact"><span class="k">GPA</span><span class="v">3.3</span></div>
+        <div class="fact"><span class="k">Graduation</span><span class="v">December 2026</span></div>
+        <div class="fact"><span class="k">Focus</span><span class="v">Supply Chain &amp; Operations</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">02 — Experience</div>
+      <h2 class="sec-title">Where I've made an impact</h2>
+    </div>
+    <div class="xp">
+      <div class="xp-item reveal">
+        <div class="xp-date">Jan 2025 — May 2025</div>
+        <h3 class="xp-title">ACRP University Design Competition</h3>
+        <div class="xp-role">Team Lead &amp; System Designer</div>
+        <p class="xp-desc">Designed an AI driven route optimization system to cut airport ground equipment emissions, built in MATLAB and SUMO with a four member team.</p>
+        <div class="xp-tags"><span class="xp-tag">MATLAB</span><span class="xp-tag">SUMO</span><span class="xp-tag">Optimization</span></div>
+      </div>
+      <div class="xp-item reveal">
+        <div class="xp-date">Sept 2025 — Dec 2025</div>
+        <h3 class="xp-title">Engineering Project Management</h3>
+        <div class="xp-role">Project Lead</div>
+        <p class="xp-desc">Built schedules, work breakdown structures, and risk and change control in Microsoft Project, through to formal closeout.</p>
+        <div class="xp-tags"><span class="xp-tag">MS Project</span><span class="xp-tag">Scheduling</span><span class="xp-tag">Risk Analysis</span></div>
+      </div>
+      <div class="xp-item reveal">
+        <div class="xp-date">Summers 2021 — 2025</div>
+        <h3 class="xp-title">Kew Gardens Animal Hospital</h3>
+        <div class="xp-role">Operations Assistant</div>
+        <p class="xp-desc">Streamlined exam prep and patient intake to cut setup time between procedures and balance daily caseload.</p>
+        <div class="xp-tags"><span class="xp-tag">Operations</span><span class="xp-tag">Scheduling</span></div>
+      </div>
+      <div class="xp-item reveal">
+        <div class="xp-date">Jan 2024 — May 2024</div>
+        <h3 class="xp-title">FIRST Robotics, Team 2638</h3>
+        <div class="xp-role">Mentor &amp; Tutor</div>
+        <p class="xp-desc">Coached students through mechanical, electrical, and systems level concepts and design tradeoffs.</p>
+        <div class="xp-tags"><span class="xp-tag">Robotics</span><span class="xp-tag">Mentorship</span></div>
+      </div>
+      <div class="xp-item reveal">
+        <div class="xp-date">Jan 2023 — Oct 2023</div>
+        <h3 class="xp-title">Penn State Intramural Sports</h3>
+        <div class="xp-role">Broadcast Lead</div>
+        <p class="xp-desc">Ran live broadcast setup, production flow, and real time problem solving during events.</p>
+        <div class="xp-tags"><span class="xp-tag">Live Production</span><span class="xp-tag">Leadership</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="capabilities">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">03 — Skills</div>
+      <h2 class="sec-title">What I bring to the table</h2>
+    </div>
+    <div class="cap-cols reveal">
+      <div class="cap-group">
+        <h3>Methods</h3>
+        <div class="cap-list">
+          <span class="cap-item">Process Optimization</span><span class="cap-item">Simulation Modeling</span><span class="cap-item">Six Sigma / SPC</span><span class="cap-item">Operations Research</span><span class="cap-item">Design of Experiments</span>
+        </div>
+      </div>
+      <div class="cap-group">
+        <h3>Software</h3>
+        <div class="cap-list">
+          <span class="cap-item">MATLAB</span><span class="cap-item">Python</span><span class="cap-item">SQL</span><span class="cap-item">Excel</span><span class="cap-item">Minitab</span><span class="cap-item">LINDO</span><span class="cap-item">SolidWorks</span><span class="cap-item">AutoCAD</span><span class="cap-item">MS Project</span><span class="cap-item">Figma</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================= -->
+<!-- LINKS SECTION · EDIT YOUR URLS BELOW                           -->
+<!-- Change each href="..." to your real link. For the resume,      -->
+<!-- upload resume.pdf next to this file (or change the href).      -->
+<!-- ============================================================= -->
+<section class="block" id="links">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">04 — Connect</div>
+      <h2 class="sec-title">Links &amp; documents</h2>
+    </div>
+    <div class="links-grid reveal">
+
+      <!-- LINKEDIN -->
+      <a class="linkcard" href="https://www.linkedin.com/in/eliabotros/" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.3c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21H9z"/></svg></span>
+        <div><div class="t">LinkedIn</div><div class="s">Professional profile</div></div>
+        <span class="arr">&#8599;</span>
+      </a>
+
+      <!-- RESUME · upload resume.pdf next to this file -->
+      <a class="linkcard" href="resume.pdf" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5"/><line x1="10" y1="13" x2="16" y2="13"/><line x1="10" y1="17" x2="16" y2="17"/></svg></span>
+        <div><div class="t">Resume</div><div class="s">Download PDF</div></div>
+        <span class="arr">&#8599;</span>
+      </a>
+
+      <!-- GITHUB · change or remove -->
+      <a class="linkcard" href="https://github.com/triggyrd" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.85l-.01 2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg></span>
+        <div><div class="t">GitHub</div><div class="s">Code &amp; projects</div></div>
+        <span class="arr">&#8599;</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="block alt" id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">05 — Portfolio</div>
+      <h2 class="sec-title">Selected work</h2>
+    </div>
+    <div class="soon reveal">
+      <div class="m">In Development</div>
+      <div class="t">Coming Soon</div>
+      <p class="n">Project write-ups and case studies are on the way. Check back shortly.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-in reveal">
+    <h2>Let's build something better.</h2>
+    <p>Open to full time and co-op opportunities for 2026 in supply chain, operations, and industrial engineering.</p>
+    <!-- mailto opens the visitor's email app; your address is not shown on the page -->
+    <a class="btn btn-primary" href="mailto:botros.elia7@gmail.com?subject=Hello%20Elia">Send me an email</a>
+    <div class="loc">New York · Open to opportunities anywhere</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <div class="foot-brand"><span class="dot"></span> Elia Botros</div>
+    <div class="foot-meta">We Are · Penn State · © 2026</div>
+    <div class="foot-secret" id="secret" tabindex="0" role="link" aria-label="Connections">· · ·</div>
+  </div>
+</footer>
+
+<script>
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>40);});
+
+  var toggle=document.getElementById('navToggle'),links=document.getElementById('navLinks');
+  toggle.addEventListener('click',function(){links.classList.toggle('open');});
+  links.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){links.classList.remove('open');});});
+
+  var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:.14});
+  document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el);});
+
+  var s=document.getElementById('secret');
+  function openSecret(){window.location.href='connections.html';}
+  s.addEventListener('click',openSecret);
+  s.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openSecret();}});
+
+  /* ===== HERO GLOW · delete this block to remove ===== */
+  (function(){
+    var hero=document.getElementById('top'),g=document.getElementById('heroGlow');
+    if(!hero||!g||!window.matchMedia||!window.matchMedia('(pointer:fine)').matches) return;
+    hero.addEventListener('mousemove',function(e){
+      var r=hero.getBoundingClientRect();
+      g.style.transform='translate('+(e.clientX-r.left)+'px,'+(e.clientY-r.top)+'px) translate(-50%,-50%)';
+      g.style.opacity=1;
+    });
+    hero.addEventListener('mouseleave',function(){g.style.opacity=0;});
+  })();
+  /* ===== end hero glow ===== */
+</script>
+</body>
+</html>
